@@ -156,6 +156,8 @@ export default class Main extends Component {
                 background   : '#e74c3c',
                 color        : '#9e3024'
               },
+              MonthButtonPrev: <div>prev</div>,
+              MonthButtonNext: <div>next</div>,
               MonthButton    : {
                 background   : '#c0392b'
               },

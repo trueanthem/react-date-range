@@ -86,6 +86,16 @@ class Calendar extends Component {
     this.setState({
       shownDate : newMonth
     });
+  }  
+
+  renderMonthButton(onlyClasses, styles, defaultButton, customButton) {    
+    const btn = styles[customButton];    
+    if (btn) {
+      return btn;
+    }
+    return (
+      <i style={onlyClasses ? undefined : { ...styles['MonthArrow'], ...styles[defaultButton] }}></i>  
+    );
   }
 
   renderMonthAndYear(classes) {
@@ -100,8 +110,8 @@ class Calendar extends Component {
         <button
           style={onlyClasses ? undefined : { ...styles['MonthButton'], float : 'left' }}
           className={classes.prevButton}
-          onClick={this.changeMonth.bind(this, -1)}>
-          <i style={onlyClasses ? undefined : { ...styles['MonthArrow'], ...styles['MonthArrowPrev'] }}></i>
+          onClick={this.changeMonth.bind(this, -1)}>                  
+          { this.renderMonthButton(onlyClasses, styles, 'MonthArrowPrev', 'MonthButtonPrev') }
         </button>
         <span>
           <span className={classes.month}>{month}</span>
@@ -111,8 +121,8 @@ class Calendar extends Component {
         <button
           style={onlyClasses ? undefined : { ...styles['MonthButton'], float : 'right' }}
           className={classes.nextButton}
-          onClick={this.changeMonth.bind(this, +1)}>
-          <i style={onlyClasses ? undefined : { ...styles['MonthArrow'], ...styles['MonthArrowNext'] }}></i>
+          onClick={this.changeMonth.bind(this, +1)}>                    
+          { this.renderMonthButton(onlyClasses, styles, 'MonthArrowNext', 'MonthButtonNext') }
         </button>
       </div>
     )

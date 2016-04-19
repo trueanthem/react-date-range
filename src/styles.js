@@ -220,6 +220,10 @@ export default (customTheme = {}) => {
 
     MonthButton : { ...defaultTheme.MonthButton, ...customTheme.MonthButton },
 
+    MonthButtonPrev : customTheme.MonthButtonPrev,
+
+    MonthButtonNext : customTheme.MonthButtonNext,
+
     MonthArrow : { ...defaultTheme.MonthArrow, ...customTheme.MonthArrow },
 
     MonthArrowPrev : { ...defaultTheme.MonthArrowPrev, ...customTheme.MonthArrowPrev },
