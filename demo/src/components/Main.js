@@ -11,7 +11,10 @@ export default class Main extends Component {
     super(props, context);
 
     this.state = {
-      'rangePicker' : {},
+      'rangePicker' : {
+        startDate: '09/08/2016',
+        endDate: '09/10/2016'
+      },
       'linked' : {},
       'datePicker' : null,
       'firstDayOfWeek' : null,
@@ -20,9 +23,12 @@ export default class Main extends Component {
   }
 
   handleChange(which, payload) {
-    this.setState({
-      [which] : payload
-    });
+  }
+
+  handleInputChange(field, e) {
+    const newState = this.state;
+    newState.rangePicker[field] = e.target.value;
+    this.setState(newState);
   }
 
   render() {
@@ -37,27 +43,26 @@ export default class Main extends Component {
         <Section title='Range Picker'>
           <div>
             <input
-              type='text'
-              readOnly
-              value={ rangePicker['startDate'] && rangePicker['startDate'].format(format).toString() }
+              type='text'              
+              value={ rangePicker['startDate'] }
+              onChange={ this.handleInputChange.bind(this, 'startDate') }
             />
             <input
-              type='text'
-              readOnly
-              value={ rangePicker['endDate'] && rangePicker['endDate'].format(format).toString() }
+              type='text'              
+              value={ rangePicker['endDate'] }
+              onChange={ this.handleInputChange.bind(this, 'endDate') }
             />
           </div>
 
           <DateRange
-            startDate='10/11/2015'
-            endDate={ now => {
-              return '11/12/2015';
-            }}
+            startDate={ rangePicker['startDate'] }
+            endDate={ rangePicker['endDate'] }
             onInit={ this.handleChange.bind(this, 'rangePicker') }
             onChange={ this.handleChange.bind(this, 'rangePicker') }
           />
         </Section>
 
+        {/*
         <Section title='Range Picker (Linked Calendars)'>
           <div>
             <input
@@ -194,6 +199,7 @@ export default class Main extends Component {
             }}
           />
         </Section>
+        */}
       </main>
     )
   }

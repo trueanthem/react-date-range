@@ -112,6 +112,14 @@ class DateRange extends Component {
 
     const classes = { ...defaultClasses, ...classNames };
 
+    let offsets = [];
+    for (var i = Number(calendars) - 1; i >= 0; i--) {
+      offsets[i] = -i;
+      if (i === Number(calendars) - 1) {
+        offsets[i] = range['startDate'].diff(range['endDate'], 'months', true);
+      }
+    }
+
     return (
       <div style={onlyClasses ? undefined : { ...styles['DateRange'], ...style }} className={classes.dateRange}>
         { ranges && (
@@ -131,7 +139,7 @@ class DateRange extends Component {
             _calendars.push(
               <Calendar
                 key={i}
-                offset={ -i }
+                offset={ offsets[i] }
                 link={ linkedCalendars && link }
                 linkCB={ this.handleLinkChange.bind(this) }
                 range={ range }
@@ -140,7 +148,7 @@ class DateRange extends Component {
                 theme={ styles }
                 minDate={ minDate }
                 maxDate={ maxDate }
-		onlyClasses={ onlyClasses }
+		            onlyClasses={ onlyClasses }
                 classNames={ classes }
                 onChange={ this.handleSelect.bind(this) }  />
             );

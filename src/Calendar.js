@@ -53,6 +53,17 @@ class Calendar extends Component {
     onInit && onInit(this.state.date);
   }
 
+  componentWillReceiveProps(newProps) {
+    const { range, offset } = newProps;    
+    const { shownDate } = this.state;
+    if (range['startDate'].isSame(range['endDate'])) {      
+      return;
+    }
+    this.setState({
+      shownDate : (range && range['endDate'] || date).clone().add(offset, 'months'),
+    });
+  }
+
   getShownDate() {
     const { link, offset } = this.props;
 
