@@ -40,7 +40,7 @@ class Calendar extends Component {
     const date = parseInput(props.date, format)
     const state = {
       date,
-      shownDate : (range && range['endDate'] || date).clone().add(offset, 'months'),
+      shownDate : (range && range['endDate'] || date).clone().add(offset, 'days'),
       firstDayOfWeek: (firstDayOfWeek || moment.localeData().firstDayOfWeek()),
     }
 
@@ -54,20 +54,19 @@ class Calendar extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { range, offset } = newProps;    
-    const { shownDate } = this.state;
-    if (range['startDate'].isSame(range['endDate'])) {      
+    const { range, offset } = newProps;
+    if (range['startDate'].isSame(range['endDate'])) {
       return;
     }
     this.setState({
-      shownDate : (range && range['endDate'] || date).clone().add(offset, 'months'),
+      shownDate: (range && range['endDate'] || date).clone().add(offset, 'days')
     });
   }
 
   getShownDate() {
     const { link, offset } = this.props;
 
-    const shownDate = (link) ? link.clone().add(offset, 'months') : this.state.shownDate;
+    const shownDate = (link) ? link.clone().add(offset, 'days') : this.state.shownDate;
 
     return shownDate;
   }

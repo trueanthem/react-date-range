@@ -109,14 +109,17 @@ class DateRange extends Component {
     const { ranges, format, linkedCalendars, style, calendars, firstDayOfWeek, minDate, maxDate, classNames, onlyClasses } = this.props;
     const { range, link } = this.state;
     const { styles } = this;
-
+    const { startDate, endDate } = range;
     const classes = { ...defaultClasses, ...classNames };
 
     let offsets = [];
     for (var i = Number(calendars) - 1; i >= 0; i--) {
-      offsets[i] = -i;
+      const shownDate = endDate.clone().add(-i, 'months');
+      offsets[i] = shownDate.diff(endDate, 'days', true);
+
       if (i === Number(calendars) - 1) {
-        offsets[i] = range['startDate'].diff(range['endDate'], 'months', true);
+        const diff = startDate.diff(endDate, 'days', true);
+        offsets[i] = Math.abs(diff) <= 31 ? offsets[i] : diff;
       }
     }
 
