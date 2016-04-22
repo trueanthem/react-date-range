@@ -82,6 +82,12 @@ const defaultTheme = {
     color         : '#95a5a6',
   },
 
+  DayInRangeFirstOfRow: {
+  },
+
+  DayInRangeLastOfRow: {    
+  },
+
   Weekday : {
     boxSizing     : 'border-box',
     display       : 'inline-block',
@@ -207,6 +213,10 @@ export default (customTheme = {}) => {
     DayEndEdge : { ...defaultTheme.DayEndEdge, ...customTheme.DayEndEdge },
 
     DayInRange : { ...defaultTheme.DayInRange, ...customTheme.DayInRange },
+
+    DayInRangeFirstOfRow: { ...defaultTheme.DayInRangeFirstOfRow, ...customTheme.DayInRangeFirstOfRow },
+
+    DayInRangeLastOfRow: { ...defaultTheme.DayInRangeLastOfRow, ...customTheme.DayInRangeLastOfRow },
 
     Weekday : {
       width         : cellSize,

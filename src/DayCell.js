@@ -52,7 +52,17 @@ class DayCell extends Component {
 
   getStateStyles() {
     const { hover, active } = this.state;
-    const { isSelected, isInRange, isPassive, isStartEdge, isEndEdge, dayMoment, isToday } = this.props;
+    const { 
+      isSelected,
+      isInRange,
+      isPassive,
+      isStartEdge,
+      isEndEdge,
+      dayMoment,
+      isToday,
+      isInRangeFirstOfRow,
+      isInRangeLastOfRow
+    } = this.props;
     const { styles } = this;
 
     const hoverStyle    = hover ? styles['DayHover'] : {};
@@ -63,7 +73,9 @@ class DayCell extends Component {
     const selectedStyle = isSelected ? styles['DaySelected'] : {};
     const inRangeStyle  = isInRange ? styles['DayInRange'] : {};
     const todayStyle    = isToday ? styles['DayToday'] : {};
-
+    const inRangeFirstOfRowStyle = isInRangeFirstOfRow ? styles['DayInRangeFirstOfRow'] : {};
+    const inRangeLastOfRowStyle = isInRangeLastOfRow ? styles['DayInRangeLastOfRow'] : {};
+    
     return {
       ...todayStyle,
       ...inRangeStyle,
@@ -72,7 +84,9 @@ class DayCell extends Component {
       ...activeStyle,
       ...selectedStyle,
       ...startEdgeStyle,
-      ...endEdgeStyle
+      ...endEdgeStyle,
+      ...inRangeLastOfRowStyle,
+      ...inRangeFirstOfRowStyle
     };
   }
 
@@ -123,6 +137,8 @@ DayCell.propTypes = {
   onSelect    : PropTypes.func,
   isSelected  : PropTypes.bool,
   isInRange   : PropTypes.bool,
+  isInRangeFirstOfRow: PropTypes.bool,
+  isInRangeLastOfRow: PropTypes.bool,
   isPassive   : PropTypes.bool,
   theme       : PropTypes.shape({
     Day       : PropTypes.object.isRequired

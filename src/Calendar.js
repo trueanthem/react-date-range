@@ -30,6 +30,14 @@ function isOusideMinMax(dayMoment, minDate, maxDate, format) {
   )
 }
 
+function isStartOfWeek(dayMoment) {
+  return dayMoment.day() === 0;
+}
+
+function isEndOfWeek(dayMoment) {
+  return dayMoment.day() === 6;
+}
+
 class Calendar extends Component {
 
   constructor(props, context) {
@@ -207,7 +215,9 @@ class Calendar extends Component {
       const isEndEdge     = range && checkEndEdge(dayMoment, range);
       const isEdge        = isStartEdge || isEndEdge;
       const isToday       = today.isSame(dayMoment);
-      const isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);
+      const isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);      
+      const isInRangeFirstOfRow = (isStartOfWeek(dayMoment) && (isInRange || isEndEdge)) || isStartEdge;
+      const isInRangeLastOfRow = (isEndOfWeek(dayMoment) && (isInRange || isStartEdge)) || isEndEdge;
 
       return (
         <DayCell
@@ -218,6 +228,8 @@ class Calendar extends Component {
           isEndEdge = { isEndEdge }
           isSelected={ isSelected || isEdge }
           isInRange={ isInRange }
+          isInRangeFirstOfRow={ isInRangeFirstOfRow }
+          isInRangeLastOfRow={ isInRangeLastOfRow }
           isToday={ isToday }
           key={ index }
           isPassive = { isPassive || isOutsideMinMax }
