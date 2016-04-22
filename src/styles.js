@@ -11,6 +11,8 @@ export const defaultClasses = {
   dayActive            : 'is-selected',
   dayPassive           : 'is-passive',
   dayInRange           : 'is-inRange',
+  dayInRangeFirstOfRow : 'is-first-of-row',
+  dayInRangeLastOfRow  : 'is-last-of-row',
   monthAndYearWrapper  : 'rdr-MonthAndYear-innerWrapper',
   prevButton           : 'rdr-MonthAndYear-button prev',
   nextButton           : 'rdr-MonthAndYear-button next',
@@ -247,3 +249,4 @@ export default (customTheme = {}) => {
     PredefinedRangesItemActive : { ...defaultTheme.PredefinedRangesItemActive, ...customTheme.PredefinedRangesItemActive }
   }
 }
+
