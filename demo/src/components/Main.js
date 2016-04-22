@@ -65,6 +65,13 @@ export default class Main extends Component {
                 marginTop: '2px',
                 marginBottom: '2px'
               },
+              DayHover: {
+                borderRadius: '5px'
+              },
+              DayPassive: {
+                opacity: 0,
+                cursor: 'none'
+              },
               DayStartEdge: {                
                 borderTopLeftRadius: '5px',
                 borderBottomLeftRadius: '5px',

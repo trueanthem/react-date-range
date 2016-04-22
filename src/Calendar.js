@@ -30,12 +30,27 @@ function isOusideMinMax(dayMoment, minDate, maxDate, format) {
   )
 }
 
-function isStartOfWeek(dayMoment) {
-  return dayMoment.day() === 0;
+function getMonthRange(dayMoment) {
+  const startOfMonth = dayMoment.clone().startOf('month');
+  const endOfMonth = dayMoment.clone().endOf('month');
+  return {
+    startOfMonth,
+    endOfMonth
+  };
 }
 
-function isEndOfWeek(dayMoment) {
-  return dayMoment.day() === 6;
+function isSameDate(date1, date2) {
+  return date1.isSame(date2, 'year') && date1.isSame(date2, 'month') && date1.isSame(date2, 'day')   
+}
+
+function isStartOfWeekMonth(dayMoment) {
+  const { startOfMonth } = getMonthRange(dayMoment)
+  return dayMoment.day() === 0 || isSameDate(dayMoment, startOfMonth);
+}
+
+function isEndOfWeekMonth(dayMoment) {
+  const { endOfMonth } = getMonthRange(dayMoment)
+  return dayMoment.day() === 6 || isSameDate(dayMoment, endOfMonth);
 }
 
 class Calendar extends Component {
@@ -216,8 +231,8 @@ class Calendar extends Component {
       const isEdge        = isStartEdge || isEndEdge;
       const isToday       = today.isSame(dayMoment);
       const isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);      
-      const isInRangeFirstOfRow = (isStartOfWeek(dayMoment) && (isInRange || isEndEdge)) || isStartEdge;
-      const isInRangeLastOfRow = (isEndOfWeek(dayMoment) && (isInRange || isStartEdge)) || isEndEdge;
+      const isInRangeFirstOfRow = (isStartOfWeekMonth(dayMoment) && (isInRange || isEndEdge)) || isStartEdge;
+      const isInRangeLastOfRow = (isEndOfWeekMonth(dayMoment) && (isInRange || isStartEdge)) || isEndEdge;
 
       return (
         <DayCell
