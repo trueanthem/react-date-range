@@ -61,7 +61,8 @@ class DayCell extends Component {
       dayMoment,
       isToday,
       isInRangeFirstOfRow,
-      isInRangeLastOfRow
+      isInRangeLastOfRow,
+      isVisible
     } = this.props;
     const { styles } = this;
 
@@ -75,6 +76,7 @@ class DayCell extends Component {
     const todayStyle    = isToday ? styles['DayToday'] : {};
     const inRangeFirstOfRowStyle = isInRangeFirstOfRow ? styles['DayInRangeFirstOfRow'] : {};
     const inRangeLastOfRowStyle = isInRangeLastOfRow ? styles['DayInRangeLastOfRow'] : {};
+    const isVisibleStyle = isVisible ? {} : { opacity: 0 };
     
     return {
       ...todayStyle,
@@ -86,7 +88,8 @@ class DayCell extends Component {
       ...startEdgeStyle,
       ...endEdgeStyle,
       ...inRangeLastOfRowStyle,
-      ...inRangeFirstOfRowStyle
+      ...inRangeFirstOfRowStyle,
+      ...isVisibleStyle
     };
   }
 
@@ -152,6 +155,7 @@ DayCell.propTypes = {
   isInRangeFirstOfRow: PropTypes.bool,
   isInRangeLastOfRow: PropTypes.bool,
   isPassive   : PropTypes.bool,
+  isVisible   : PropTypes.bool,
   theme       : PropTypes.shape({
     Day       : PropTypes.object.isRequired
   }).isRequired,

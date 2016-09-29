@@ -236,6 +236,7 @@ class Calendar extends Component {
       const isOutsideMinMax = isOusideMinMax(dayMoment, minDate, maxDate, format);      
       const isInRangeFirstOfRow = (isStartOfWeekMonth(dayMoment) && (isInRange || isEndEdge)) || isStartEdge;
       const isInRangeLastOfRow = (isEndOfWeekMonth(dayMoment) && (isInRange || isStartEdge)) || isEndEdge;
+      const isVisible = dayMoment.month() === monthNumber;
 
       return (
         <DayCell
@@ -251,6 +252,7 @@ class Calendar extends Component {
           isToday={ isToday }
           key={ index }
           isPassive = { isPassive || isOutsideMinMax }
+          isVisible = { isVisible }
           onlyClasses = { onlyClasses }
           classNames = { classes }
         />
