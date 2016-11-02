@@ -143,7 +143,7 @@ class Calendar extends Component {
 
   renderMonthAndYear(classes) {
     const shownDate       = this.getShownDate();
-    const month           = moment.months(shownDate.month());
+    const month           = shownDate.format("MMM.");
     const year            = shownDate.year();
     const { styles }      = this;
     const { onlyClasses } = this.props;
@@ -158,7 +158,7 @@ class Calendar extends Component {
         </button>
         <span>
           <span className={classes.month}>{month}</span>
-          <span className={classes.monthAndYearDivider}> - </span>
+          <span className={classes.monthAndYearDivider}>&nbsp;</span>
           <span className={classes.year}>{year}</span>
         </span>
         <button
